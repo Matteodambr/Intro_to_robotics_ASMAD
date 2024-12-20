@@ -41,6 +41,8 @@ configuration = rand(7,1) ;
 show(RBT_kuka, setConfiguration(q_desired, RBT_kuka)) ;
 
 
+%% Local functions
+
 function config = setConfiguration(configuration_vec, RBT)
 
 config = randomConfiguration(RBT) ;
