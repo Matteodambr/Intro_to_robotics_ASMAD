@@ -41,6 +41,8 @@ configuration = rand(7,1) ;
 
 % Show robot plot
 show(RBT_kuka, setConfiguration(q_desired, RBT_kuka)) ;
+hold on ;
+title('Desired manipulator configuration') ;
 
 
 
