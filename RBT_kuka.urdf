@@ -9,7 +9,7 @@
         <visual>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000 0.00000000 0.00000000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_0.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_0.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
             <material name="">
                 <color rgba="0.40000000 0.40000000 0.40000000 1.00000000"/>
@@ -18,7 +18,7 @@
         <collision>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000 0.00000000 0.00000000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_0.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_0.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
         </collision>
     </link>
@@ -31,7 +31,7 @@
         <visual>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000 0.00000000 0.00750000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_1.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_1.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
             <material name="">
                 <color rgba="1.00000000 0.42352941 0.03921569 1.00000000"/>
@@ -40,7 +40,7 @@
         <collision>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000 0.00000000 0.00750000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_1.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_1.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
         </collision>
     </link>
@@ -53,7 +53,7 @@
         <visual>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000 0.00000000 0.00000000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_2.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_2.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
             <material name="">
                 <color rgba="1.00000000 0.42352941 0.03921569 1.00000000"/>
@@ -62,7 +62,7 @@
         <collision>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000 0.00000000 0.00000000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_2.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_2.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
         </collision>
     </link>
@@ -75,7 +75,7 @@
         <visual>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000  0.00000000 -0.02600000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_3.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_3.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
             <material name="">
                 <color rgba="1.00000000 0.42352941 0.03921569 1.00000000"/>
@@ -84,7 +84,7 @@
         <collision>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000  0.00000000 -0.02600000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_3.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_3.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
         </collision>
     </link>
@@ -97,7 +97,7 @@
         <visual>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000 0.00000000 0.00000000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_4.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_4.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
             <material name="">
                 <color rgba="1.00000000 0.42352941 0.03921569 1.00000000"/>
@@ -106,7 +106,7 @@
         <collision>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000 0.00000000 0.00000000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_4.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_4.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
         </collision>
     </link>
@@ -119,7 +119,7 @@
         <visual>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000  0.00000000 -0.02600000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_5.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_5.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
             <material name="">
                 <color rgba="1.00000000 0.42352941 0.03921569 1.00000000"/>
@@ -128,7 +128,7 @@
         <collision>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000  0.00000000 -0.02600000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_5.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_5.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
         </collision>
     </link>
@@ -141,7 +141,7 @@
         <visual>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000 0.00000000 0.00000000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_6.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_6.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
             <material name="">
                 <color rgba="1.00000000 0.42352941 0.03921569 1.00000000"/>
@@ -150,7 +150,7 @@
         <collision>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000 0.00000000 0.00000000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_6.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_6.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
         </collision>
     </link>
@@ -163,7 +163,7 @@
         <visual>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000  0.00000000 -0.00050000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_7.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\visual\link_7.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
             <material name="">
                 <color rgba="0.40000000 0.40000000 0.40000000 1.00000000"/>
@@ -172,7 +172,7 @@
         <collision>
             <origin rpy="0.00000000 0.00000000 0.00000000" xyz="0.00000000  0.00000000 -0.00050000"/>
             <geometry>
-                <mesh filename="C:\Program Files\MATLAB\R2024b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_7.stl" scale="1.00000000 1.00000000 1.00000000"/>
+                <mesh filename="C:\Program Files\MATLAB\R2025b\toolbox\robotics\robotmodels\exampleRobots\iiwa_description\meshes\iiwa7\collision\link_7.stl" scale="1.00000000 1.00000000 1.00000000"/>
             </geometry>
         </collision>
     </link>
@@ -227,7 +227,7 @@
     <joint name="iiwa_joint_5" type="revolute">
         <parent link="iiwa_link_4"/>
         <child link="iiwa_link_5"/>
-        <origin rpy="1.57079633 -0.00000000 -3.14159265" xyz="0.00000000 0.21000000 0.00000000"/>
+        <origin rpy="1.57079633 -0.00000000  3.14159265" xyz="0.00000000 0.21000000 0.00000000"/>
         <axis xyz="0.00000000 0.00000000 1.00000000"/>
         <limit lower="-2.96705973" upper="2.96705973" effort="0" velocity="0"/>
     </joint>
@@ -241,7 +241,7 @@
     <joint name="iiwa_joint_7" type="revolute">
         <parent link="iiwa_link_6"/>
         <child link="iiwa_link_7"/>
-        <origin rpy="1.57079633 -0.00000000 -3.14159265" xyz="0.00000000 0.08100000 0.06070000"/>
+        <origin rpy="1.57079633 -0.00000000  3.14159265" xyz="0.00000000 0.08100000 0.06070000"/>
         <axis xyz="0.00000000 0.00000000 1.00000000"/>
         <limit lower="-3.05432619" upper="3.05432619" effort="0" velocity="0"/>
     </joint>
