@@ -34,8 +34,8 @@ EE_home_DCM = tform2rotm(T_home) ; % or EE_home_DCM = T_home(1:3, 1:3) ;
 
 % Target EE pose
 EE_target_POS = [0.4; 0.2; 0.7] ; % Goal position for the end-effector
-EE_target_DCM = [0, 0, 1; 0, 1, 0; -1, 0, 0] * eye(3) ; % eye(3) is the home configuration corresponding to joint angles (0,...,0), while [0, 0, 1; 0, 1, 0; -1, 0, 0] is a matrix representing a 90 deg rotation around Y
-T_target = eye(4) ;
+EE_target_DCM = [0, 0, 1; 0, 1, 0; -1, 0, 0] * eye(3) ; % 90 deg rotation around Y from initial DCM
+T_target = eye(4) ; % Create homogenous transformation matrix
 T_target(1:3,1:3) = EE_target_DCM ;
 T_target(1:3, end) = EE_target_POS ;
 
