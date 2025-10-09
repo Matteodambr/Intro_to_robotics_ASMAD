@@ -156,7 +156,51 @@ grid on ;
 legend() ;
 
 %% Control EE to desired state (simscape_kuka.slx)
-% TODO
+
+% Define variables for simscape_kuka.slx
+initial_configuration = [home_configuration.JointPosition] ;
+final_configuration = [target_configuration.JointPosition] ;
+
+% Add Mesh folder to path
+if isfolder('Meshes')
+    addpath(genpath('Meshes')) ;
+end
+
+% Link geometries to simscape simulator - workaround to easily run on any pc
+simModel = 'simscape_kuka' ;
+load_system(simModel) ;
+visBlocks = find_system(simModel, 'MaskType', 'File Solid') ;
+link_blocks(visBlocks, simModel) ;
+
+% Control params
+K_P = diag([2, 3, 3, 3, 0.5, 0.5, 0.05])  ;
+K_D = diag([2, 9, 9, 6,   1,   1, 0.05])  ;
+K_I = 0 ;
+
+% Run simulation
+simOut = sim(simModel, 'SimulationMode', 'normal') ;
+
+% Plot torque evolution
+figure ; hold on ; grid on ;
+plot(repmat(simOut.tau_control.time, 1, simOut.tau_control.signals.dimensions), simOut.tau_control.signals.values, LineWidth=2) ;
+legend(arrayfun(@(i) ['Joint ', num2str(i)], 1:7, 'UniformOutput', false), 'Location', 'southeast', 'FontSize', 13) ;
+yMin = min(simOut.tau_control.signals.values, [], 'all') ;
+yMax = max(simOut.tau_control.signals.values, [], 'all') ;
+yRange = yMax - yMin ;
+ylim([yMin - 0.15*yRange, yMax + 0.15*yRange]) ;
+title('Manipulator joint control') ;
+xlabel('Time [s]', 'FontSize', 13) ; ylabel('Torque [Nm]', 'FontSize', 13) ;
+
+% Plot error evolution
+figure ; hold on ; grid on ;
+plot(repmat(simOut.q_err_rad.time, 1, simOut.q_err_rad.signals.dimensions), rad2deg(simOut.q_err_rad.signals.values), LineWidth=2) ;
+legend(arrayfun(@(i) ['Joint ', num2str(i)], 1:7, 'UniformOutput', false), 'Location', 'southeast', 'FontSize', 13) ;
+yMin = min(rad2deg(simOut.q_err_rad.signals.values), [], 'all') ;
+yMax = max(rad2deg(simOut.q_err_rad.signals.values), [], 'all') ;
+yRange = yMax - yMin ;
+ylim([yMin - 0.15*yRange, yMax + 0.15*yRange]) ;
+title('Manipulator joint control') ;
+xlabel('Time [s]', 'FontSize', 13) ; ylabel('q - q_{ref} [deg]', 'FontSize', 13) ;
 
 %% Save all open figures to PNG (300 DPI) in current folder
 figs = findall(0, 'Type', 'figure') ;
@@ -181,5 +225,35 @@ config = randomConfiguration(RBT) ; % Initialize structure
 for k = 1:length(configuration_vec)
     config(k).JointPosition = configuration_vec(k) ;
 end
+
+end
+
+function link_blocks(visBlocks, simModel)
+meshFolder = 'Meshes' ;
+for i = 1:numel(visBlocks)
+    blkPath = visBlocks{i} ;
+
+    % Extract link index from block path (e.g. iiwa_link_3 → 3)
+    tokens = regexp(blkPath, 'iiwa_link_(\d+)', 'tokens') ;
+    if isempty(tokens)
+        fprintf('  Could not parse link index for %s\n', blkPath) ;
+        continue ;
+    end
+    linkIdx = tokens{1}{1} ;
+
+    % Expected STL file name
+    stlFile = fullfile(meshFolder, sprintf('link_%s.stl', linkIdx)) ;
+
+    if ~isfile(stlFile)
+        fprintf('  Mesh not found for link %s (%s)\n', linkIdx, stlFile) ;
+        continue ;
+    end
+
+    % Update the File Solid block
+    set_param(blkPath, 'ExtGeomFileName', fullfile(meshFolder, ['link_', num2str(linkIdx), '.stl'])) ;
+
+end
+
+save_system(simModel) ;
 
 end
