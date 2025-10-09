@@ -1,9 +1,7 @@
 clearvars ; close all ; clc ; beep off ;
-
-% Procedure
-% 1. Load model
-% 2. Choose desired EE state, and solve inverse kinematics
-% 3. Control the EE to desired state
+set(0, 'DefaultFigureUnits', 'pixels') ;
+set(0, 'DefaultFigurePosition', [100, 100, 707, 531]) ;
+set(findall(0, 'Type', 'figure'), 'Units', 'pixels', 'Position', [200, 200, 707, 531]) ;
 
 % Load the robot from matlab pre-loaded models
 RBT_kuka = loadrobot('kukaiiwa7') ;
@@ -20,6 +18,8 @@ RBT_kuka = loadrobot('kukaiiwa7') ;
 
 % Show robot in plot, in the "home" configuration
 show(RBT_kuka) ; hold on, title('Home manipulator configuration') ;
+xlabel('X [m]') ; ylabel('Y [m]') ; zlabel('Z [m]') ; grid on ;
+xlim([-0.7, 0.7]) ; ylim([-0.7, 0.7]) ; zlim([0, 1.5]) ;
 
 % Find end-effector of robot
 endEffector_body = RBT_kuka.BodyNames{end} ;
@@ -49,12 +49,18 @@ weight = ones(6, 1) ; % xyz_rotation, xyz_translation
 assert(sol_info.ExitFlag == 1, 'Solver failed to converge. Target pose is likely outside of the manipulator''s workspace.') ;
 
 % Display initial guess and inverse kinematics solution
-inverse_kinematics_initial_guess =  [home_configuration.JointPosition] ;
-inverse_kinematics_final_solution = [target_configuration.JointPosition] ;
-joint_labels = arrayfun(@(i) sprintf('theta_%d', i), 1:numel([home_configuration.JointPosition]), 'UniformOutput', false) ;
-row_labels = {'Rand Guess  (deg)'; 'IK Solution (deg)'};
-results = array2table([rad2deg(inverse_kinematics_initial_guess); rad2deg(inverse_kinematics_final_solution)], 'VariableNames', joint_labels, 'RowNames', row_labels) ;
-disp(results) ;
+inverse_kinematics_initial_guess =  [home_configuration.JointPosition];
+inverse_kinematics_final_solution = [target_configuration.JointPosition];
+joint_labels = arrayfun(@(i) sprintf('theta_%d', i), ...
+    1:numel([home_configuration.JointPosition]), ...
+    'UniformOutput', false);
+column_labels = {'Rand Guess  (deg)', 'IK Solution (deg)'};
+results = array2table(rad2deg([inverse_kinematics_initial_guess; ...
+                               inverse_kinematics_final_solution])', ...
+    'VariableNames', column_labels, ...
+    'RowNames', joint_labels);
+disp(results);
+
 
 % Check that configuration found via IK corresponds to desired EE target,
 % using direct kinematics
@@ -67,11 +73,27 @@ figure ;
 show(RBT_kuka, setConfiguration(inverse_kinematics_final_solution, RBT_kuka)) ;
 hold on ;
 title('Target manipulator configuration') ;
+xlabel('X [m]') ; ylabel('Y [m]') ; zlabel('Z [m]') ; grid on ;
+xlim([-0.7, 0.7]) ; ylim([-0.7, 0.7]) ; zlim([0, 1.2]) ;
 
 %% Workspace analysis
 
 % Generate robot workspace
+rng('shuffle') ;
 [workspace, configurations] = generateRobotWorkspace(RBT_kuka, {}) ;
+
+% Plot workspace
+figure ;
+show(RBT_kuka) ;
+hold on ;
+workspace_area = alphaShape(workspace(:,1), ...
+                            workspace(:,2), ...
+                            workspace(:,3)) ;
+plot(workspace_area, FaceAlpha=0.45, EdgeColor='none') ;
+title('Manipulator workspace') ;
+xlabel('X [m]') ; ylabel('Y [m]') ; zlabel('Z [m]') ; axis equal ; grid on ;
+
+%% Manipulability index
 
 % Find manipulability index (using Yoshikawa)
 manipulability_index = manipulabilityIndex(RBT_kuka, configurations, ...
@@ -82,6 +104,8 @@ figure ;
 show(RBT_kuka) ;
 hold on ;
 showWorkspaceAnalysis(workspace, manipulability_index) ;
+title('Manipulability index in workspace') ;
+xlabel('X [m]') ; ylabel('Y [m]') ; zlabel('Z [m]') ; axis equal ; grid on ;
 
 %% How well does the robot manipulate around a specific position? (i.e. your target)
 samples_per_axis = 25 ;
@@ -98,6 +122,8 @@ for k = 1:samples_per_axis+1
     z = z_vec(k) ;
     for j = 1:samples_per_axis
         y = y_vec(j) ;
+
+        % Compute IK
         T_target_kj(2:3, end) = [y; z] ;
         [manip_configuration, sol_info] = ik_solver(endEffector_body, T_target_kj, weight, target_configuration_kj) ; % Guess is already the target configuration, since it is close to solution
         T = getTransform(RBT_kuka, manip_configuration, endEffector_body) ;
@@ -108,7 +134,7 @@ for k = 1:samples_per_axis+1
         if IK_Successful
             reachable(j,k) = true ;
             J = geometricJacobian(RBT_kuka, manip_configuration, endEffector_body) ;
-            s = svd(J(1:3,:)) ;
+            s = svd(J) ;
             manipulability(j,k) = prod(s) ;
             target_configuration_kj = manip_configuration ;
         else
@@ -126,10 +152,25 @@ scatter(EE_target_POS(2), EE_target_POS(3), 80, 'red', 'filled', 'o', 'DisplayNa
 axis equal ; xlabel('Y [m]') ; ylabel('Z [m]') ;
 title('Manipulability around target position (ZY plane)') ;
 colorbar ; colormap('parula') ;
+grid on ;
 legend() ;
 
 %% Control EE to desired state (simscape_kuka.slx)
+% TODO
 
+%% Save all open figures to PNG (300 DPI) in current folder
+figs = findall(0, 'Type', 'figure') ;
+if ~isempty(figs)
+    [~, idx] = sort([figs.Number]) ;
+    figs = figs(idx) ;
+    for i = 1:numel(figs)
+        fig = figs(i) ;
+        drawnow ;
+        fname = fullfile(pwd, sprintf('figure_%02d.png', fig.Number)) ;
+        set(fig, 'PaperPositionMode', 'auto') ;
+        print(fig, fname, '-dpng', '-r300') ;
+    end
+end
 
 %% Local functions
 
