@@ -202,6 +202,56 @@ ylim([yMin - 0.15*yRange, yMax + 0.15*yRange]) ;
 title('Manipulator joint control') ;
 xlabel('Time [s]', 'FontSize', 13) ; ylabel('q - q_{ref} [deg]', 'FontSize', 13) ;
 
+%% Check torques experienced by manipulator, with a target attached
+target_mass = 150 ; % [kg]
+target_width = 0.6 ; % [m]
+target_length = 0.6 ; % [m]
+target_height = 0.5 ; % [m]
+
+% Control params unchanged from previous case
+simModel = 'simscape_kuka_target' ;
+load_system(simModel) ;
+visBlocks = find_system(simModel, 'MaskType', 'File Solid') ;
+link_blocks(visBlocks, simModel) ;
+
+% Run simulation
+simOut = sim(simModel, 'SimulationMode', 'normal') ;
+
+% Plot torque evolution
+figure ; hold on ; grid on ;
+plot(repmat(simOut.tau_control.time, 1, simOut.tau_control.signals.dimensions), simOut.tau_control.signals.values, LineWidth=2) ;
+legend(arrayfun(@(i) ['Joint ', num2str(i)], 1:7, 'UniformOutput', false), 'Location', 'southeast', 'FontSize', 13) ;
+yMin = min(simOut.tau_control.signals.values, [], 'all') ;
+yMax = max(simOut.tau_control.signals.values, [], 'all') ;
+yRange = yMax - yMin ;
+ylim([yMin - 0.15*yRange, yMax + 0.15*yRange]) ;
+title('Manipulator joint control - w/ target') ;
+xlabel('Time [s]', 'FontSize', 13) ; ylabel('Torque [Nm]', 'FontSize', 13) ;
+
+% Plot error evolution
+figure ; hold on ; grid on ;
+plot(repmat(simOut.q_err_rad.time, 1, simOut.q_err_rad.signals.dimensions), rad2deg(simOut.q_err_rad.signals.values), LineWidth=2) ;
+legend(arrayfun(@(i) ['Joint ', num2str(i)], 1:7, 'UniformOutput', false), 'Location', 'southeast', 'FontSize', 13) ;
+yMin = min(rad2deg(simOut.q_err_rad.signals.values), [], 'all') ;
+yMax = max(rad2deg(simOut.q_err_rad.signals.values), [], 'all') ;
+yRange = yMax - yMin ;
+ylim([yMin - 0.15*yRange, yMax + 0.15*yRange]) ;
+title('Manipulator joint control - w/ target') ;
+xlabel('Time [s]', 'FontSize', 13) ; ylabel('q - q_{ref} [deg]', 'FontSize', 13) ;
+
+% Final pose errors with previous controller
+final_joint_angles = num2cell(simOut.theta.signals.values(end,:)) ; % Final joint angles
+final_target_configuration = target_configuration ; % Initialize
+[final_target_configuration.JointPosition] = deal(final_joint_angles{:}) ;
+
+% Erros with respect to desired pose
+final_joint_error_angles_deg = rad2deg([final_joint_angles{:}] - final_configuration ) ; % [deg]
+% TODO: Compute the same errors, on the end-effector cartesian state
+% (position, attitude), through direct kinematics, using final_target_configuration
+
+% Run same analysis with updated control parameters, to estimate maximum required
+% torques
+
 %% Save all open figures to PNG (300 DPI) in current folder
 figs = findall(0, 'Type', 'figure') ;
 if ~isempty(figs)
